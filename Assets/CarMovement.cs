@@ -12,6 +12,8 @@ public class CarMovement : MonoBehaviour
     public GameObject Fireball;
     public int score;
     public Text scoreText;
+    public Text GameWon;
+    public Text GameOver;
     // Start is called before the first frame update
     void Start()
     {
@@ -46,6 +48,19 @@ public class CarMovement : MonoBehaviour
             Destroy(collision.gameObject);
             score = score + 10;
             scoreText.text=score.ToString();
+        }
+        if (collision.gameObject.tag == "Potion")
+        {
+            Destroy(collision.gameObject);
+            GameWon.GetComponent<Text>().enabled = true;
+        
+        }
+        if (collision.gameObject.tag == "Monster")
+        {
+            Destroy(collision.gameObject);
+            GameOver.GetComponent<Text>().enabled = true;
+            player.GetComponent<Animator>().enabled = false;
+
         }
     }
 }

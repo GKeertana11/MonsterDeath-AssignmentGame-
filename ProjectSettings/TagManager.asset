@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Gem
   - Monster
+  - Potion
   layers:
   - Default
   - TransparentFX
