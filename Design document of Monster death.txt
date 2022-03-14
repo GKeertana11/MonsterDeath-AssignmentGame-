@@ -1,0 +1,17 @@
+Monster Death:
+Monster Death is a single player 2D platform game. 
+Player need to kill monsters by shooting the fireballs.
+Player should collect gems and in the end of the level player needs to collect the potion and can move into the next level.
+
+Steps to develop game.
+1.Environment Design.
+2.Player movement and jump.
+3.Fireball spawning.
+4.Gems collection.
+5.updating score.
+6.Destroy monsters- if fireball collides with monster should destroy.
+7. If player collides with monster Gameover text should be displayed. 
+8.if player reaches to the potion and collects it next level should be loaded and Game Won text should be displayed.
+ 
+Win Condition: When player reaches end of the level and all monsters should be destroyed.
+Loose Condition: If player collides with monster then Game ends.
