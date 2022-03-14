@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 public class CarMovement : MonoBehaviour
 {
     public float playerSpeed;
@@ -14,6 +15,8 @@ public class CarMovement : MonoBehaviour
     public Text scoreText;
     public Text GameWon;
     public Text GameOver;
+    public bool istrue=false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,21 +27,23 @@ public class CarMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.RightArrow))
+        if (istrue == false)
         {
-            transform.position = transform.position + Vector3.right* playerSpeed * Time.deltaTime;
-            sprite.flipX = false;
+            if (Input.GetKey(KeyCode.RightArrow))
+            {
+                transform.position = transform.position + Vector3.right * playerSpeed * Time.deltaTime;
+                sprite.flipX = false;
+            }
+            if (Input.GetKey(KeyCode.LeftArrow))
+            {
+                sprite.flipX = true;
+                transform.position = transform.position + Vector3.left * playerSpeed * Time.deltaTime;
+            }
+            if (Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                rb.AddForce(Vector3.up * jumpForce);
+            }
         }
-        if (Input.GetKey(KeyCode.LeftArrow))
-        {
-            sprite.flipX = true;
-            transform.position = transform.position + Vector3.left* playerSpeed * Time.deltaTime;
-        }
-        if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            rb.AddForce(Vector3.up * jumpForce);
-        }
-      
 
     }
     private void OnCollisionEnter2D(Collision2D collision)
@@ -53,6 +58,9 @@ public class CarMovement : MonoBehaviour
         {
             Destroy(collision.gameObject);
             GameWon.GetComponent<Text>().enabled = true;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+
+
         
         }
         if (collision.gameObject.tag == "Monster")
@@ -60,6 +68,7 @@ public class CarMovement : MonoBehaviour
             Destroy(collision.gameObject);
             GameOver.GetComponent<Text>().enabled = true;
             player.GetComponent<Animator>().enabled = false;
+            istrue = true;
 
         }
     }
